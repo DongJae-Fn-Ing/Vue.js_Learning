@@ -1,18 +1,18 @@
 <template>
-    <div class="component">
+  <div class="component">
     <h4>지금 사 안사면 멍청이</h4>
   </div>
 </template>
 
 <script>
 export default {
-  name:"comOne",
+  name: "comOne",
   /* 무조건 name써라 */
-}
+};
 </script>
 
 <style>
-.component{
+.component {
   background: red;
   width: 100%;
   padding: 10px;
