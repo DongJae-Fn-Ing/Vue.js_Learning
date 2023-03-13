@@ -5,7 +5,7 @@
       <h4>{{ dataFile[click].title }}</h4>
       <p>{{ dataFile[click].content }}</p>
       <p>{{ dataFile[click].price }}</p>
-      <!-- <button type="button" v-on:click="modal = false">닫기 버튼</button> -->
+      <button type="button" v-on:click="$emit('openModal', dataFile[click].id)">닫기 버튼</button> 
     </div>
   </div>
 </template>
