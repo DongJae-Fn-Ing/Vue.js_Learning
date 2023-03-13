@@ -3,7 +3,7 @@
     <img :src="dataFile.image" alt="테스트용 이미지" />
     <!--<h4 class="box-title" v-on:click="modal = true, click = i">
       {{dataFile.title}}</h4> -->
-    <h4 class="box-title" v-on:click="(modal = true), (click = i)">
+    <h4 class="box-title" v-on:click="$emit('openModal', dataFile.id)">
       {{ dataFile.title }}
     </h4>
     <p>{{ dataFile.price }}만원</p>

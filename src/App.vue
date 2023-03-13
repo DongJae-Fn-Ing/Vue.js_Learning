@@ -23,7 +23,12 @@
 
   <div class="content">
     <ul class="list">
-      <CardItem v-for="(a, i) in oneroom" :key="i" :dataFile="oneroom[i]" />
+      <CardItem
+        @openModal="modal = true; click = $event"
+        v-for="(a, i) in oneroom"
+        :key="i"
+        :dataFile="oneroom[i]"
+      />
     </ul>
   </div>
 
@@ -311,3 +316,59 @@ v-bind & : 없이 보낼수있다.
 ex : people: { name: "kar", age: "29" },
 <com :이름="people.name" :나이="people.age" /> 로 써야하지만
 <com v-bind="people" />로 한번에 보낼 수 있다. 그다지 비추 */
+
+
+/* 
+ 2023 03 13
+props는 수정을 하면 불가
+read oniy
+만약 부모에 있는 값을 수정하고 싶다?
+custom event를 사용하면 됩니다.
+여기서 의문 그러면 컴포넌트에 클릭이벤트를 달면 되는 거 아니야?
+??? 하지만 여기서 이벤트 버블링이 발생
+
+자식이 부모에게 일단 메시지를 보내는 형식이라 생각을 해라
+자식 컴포넌트 이벤가 발생하는 부분에
+$emit() 추가
+$ == 뷰에 내장된 특별한 함수 
+
+부모에게 메세지 보낼 때
+$emit("작명",데이터)
+
+그리고 컴포넌트가 호출한 곳을 가서 작명한 걸을 html 형식으로 써준다.
+      <CardItem
+        @openModal="modal = true"
+        v-for="(a, i) in oneroom"
+        :key="i"
+        :dataFile="oneroom[i]"
+      />
+ 
+
+컴포넌트 데이터를 쓰고 싶을 때는 
+  <h4 class="box-title" v-on:click="$emit('openModal', i)">
+  </h4>
+  이벤트가 발생하는 곳에 id값이나 키값 등을 추가하고
+
+        <CardItem
+        @openModal="(modal = true), (click = $event)"
+        v-for="(a, i) in oneroom"
+        :key="i"
+        :dataFile="oneroom[i]"
+      />
+      컴포넌트 안 작명한 속성 안에
+      pros값 = $event로 입력을 한다.
+
+      만약에 $emit 같은 것을 함수안에 쓰고 싶으면
+      methods에 쓰고
+      함수() 작명하고
+      안에 써서 사용해라
+
+  methods: {
+    name(){
+      this.$emit('openModal', this.i)
+    }
+  },
+  여기서도 this를 써라
+  외부 데이터를 참조할 때 무조건
+
+  모달창 닫기 버튼 만들기  */
