@@ -36,7 +36,7 @@
 
   <!-- 사용 -->
 
-  <Modal :dataFile="oneroom" :click="click" :modal="modal" />
+  <Modal :dataFile="oneroom" :click="click" :modal="modal" @openModal="modal = false; click = $event" />
 </template>
 
 <script>
