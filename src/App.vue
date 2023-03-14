@@ -24,7 +24,10 @@
   <div class="content">
     <ul class="list">
       <CardItem
-        @openModal="modal = true; click = $event"
+        @openModal="
+          modal = true;
+          click = $event;
+        "
         v-for="(a, i) in oneroom"
         :key="i"
         :dataFile="oneroom[i]"
@@ -36,7 +39,15 @@
 
   <!-- 사용 -->
 
-  <Modal :dataFile="oneroom" :click="click" :modal="modal" @openModal="modal = false; click = $event" />
+  <Modal
+    :dataFile="oneroom"
+    :click="click"
+    :modal="modal"
+    @openModal="
+      modal = false;
+      click = $event;
+    "
+  />
 </template>
 
 <script>
@@ -149,38 +160,6 @@ export default {
 .list li p {
   display: block;
   margin: 5px 0;
-}
-
-/* 임시 모달창 */
-
-.bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  transition: all 0.3s;
-}
-
-.bg .modal {
-  width: 400px;
-  height: 400px;
-  background: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 4px;
-  padding: 20px;
-  text-align: center;
-}
-
-.bg .modal h4 {
-  margin-bottom: 20px;
-}
-
-.bg .modal img {
-  width: 100%;
 }
 </style>
 
@@ -372,3 +351,69 @@ $emit("작명",데이터)
   외부 데이터를 참조할 때 무조건
 
   모달창 닫기 버튼 만들기  */
+
+
+
+
+/* 20230314 학습 */
+/*       <input
+        v-on:input="mon = $event.target.value"
+        type="text"
+        name=""
+        id=""
+        class="input"
+      />
+ $event 이게 자바스크립트 파라미터랑 같음 */
+/* 
+ v-on:input="mon = $event.target.value"이거의 축약 버전
+ v-model="" 문법 여기에 입력한 데이터를 저장해주세요
+       
+       <input
+        v-model="mon"
+        type="text"
+        name=""
+        id=""
+        class="input"
+      />
+
+      1. v-model 인풋의 입력한 값을 스테이트 부분에 삽입해준다.
+      2. textarea.select 등등 모든 것 가능
+      3. 스테이트의 초기값이 중요하다  초기값 입력한 것에 따라 인식을 하는게 다르다 예를 들어 처음 스테이트에 문자면 문자 숫자면 숫자
+      4. input에 입력한 것은 전부 문자형 자료형
+      그래서 무조건 입력 받고 싶은 것이 숫자로 만들고 싶으면
+      <input
+        v-model.number="mon"
+        type="text"
+        name=""
+        id=""
+        class="input"
+      />
+/*       v-model 뒤에 .number를 써라 그냥 숫자로 바꿔주는 것 문자 입력을 막을 수 없다 */
+
+      인풋에 경고문을 띄우싶다
+      -watcher : 데이터에 이상한 거 들어올 때 이걸로 방지한다.
+      컴포넌트 methods등을 입력하는 곳에
+      watch를 입력한다. 그리고 감시할 스테이트명으로 함수를 만든다.
+        watch: {
+           mon(a){
+            여기서 a는 사용자가 입력한 값
+          }
+      이렇게 */
+/*       다시 정리하면 
+/*       데이터를 감시하려면
+      whtach: {감시할데이터(){}} */
+      이렇게 만들면 mon라는 스테이트의 값이 변화할 때마다 코드가 watch에 코드가 
+      실행된다. */
+/* 
+
+    watch: {
+    mon(a,b){
+     if(a >= 13){
+        alert("멍청아 값이 너무커 13이상 입력하지마");
+      }
+    }
+  },
+  여기서 b는 변경전 데이터 */
+
+ /*  숙제
+  문자를 입력하면 경고창 뛰우고 값을 1로 되돌리기 */
