@@ -1,6 +1,6 @@
 <template>
   <div class="component">
-    <h4>지금 사 안사면 멍청이</h4>
+    <h4>지금 사 안사면 멍청이 {{ disCount }}%</h4>
   </div>
 </template>
 
@@ -8,6 +8,21 @@
 export default {
   name: "comOne",
   /* 무조건 name써라 */
+  data() {
+    return {
+      disCount: 30,
+    };
+  },
+
+  mounted() {
+    let time = setInterval(() => {
+      this.disCount--;
+      if (this.disCount === 0) {
+        clearTimeout(time);
+        this.disCount = 30;
+      }
+    }, 100);
+  },
 };
 </script>
 
