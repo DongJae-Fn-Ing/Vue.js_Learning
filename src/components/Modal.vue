@@ -23,12 +23,18 @@ export default {
     };
   },
   watch: {
-    mon(a) {
+    /*     mon(a) {
       if (typeof a === "string") {
         alert("멍청아 문자 입력하지마");
         return (this.mon = 1);
       }
-    },
+    }, */
+  },
+  updated() {
+    if (this.mon === -2) {
+      alert("멍청아");
+      this.mon = 3;
+    }
   },
   props: {
     dataFile: Object,
@@ -50,7 +56,7 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
-  transition: all 0.3s;
+  transition: all 1s;
 }
 
 .bg .modal {
