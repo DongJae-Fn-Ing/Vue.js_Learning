@@ -7,7 +7,7 @@
       <input v-model.number="mon" type="text" name="" id="" class="input" />
       <p>{{ mon }}개월수</p>
       <p>{{ dataFile[click].price * mon }}원</p>
-      <button type="button" v-on:click="$emit('openModal', dataFile[click].id)">
+      <button class="close" type="button" v-on:click="$emit('openModal', dataFile[click].id)">
         닫기 버튼
       </button>
     </div>
@@ -81,7 +81,15 @@ export default {
 }
 
 .bg .modal .input {
-  width: 100%;
+  width: 200px;
+  height: 30px;
+  border: 1px solid #ddd;
+  margin: 0 auto;
   display: block;
+}
+
+.close{
+  border: 1px solid #ddd;
+  background: #ddd;
 }
 </style>

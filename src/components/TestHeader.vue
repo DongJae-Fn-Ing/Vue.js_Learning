@@ -42,8 +42,9 @@ export default {
 }
 
 .header h2 {
-  width: 50px;
+  width: 100px;
   height: 100%;
+  padding-left: 10px;
   line-height: 50px;
   background: blanchedalmond;
 }
@@ -64,12 +65,15 @@ export default {
 }
 
 .gnb ul li button {
-  height: 100%;
-}
-.gnb ul li button a {
-  display: flex;
-  align-items: center;
   width: 100%;
   height: 100%;
+  padding: 0;
+}
+.gnb ul li button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 50px;
+  background: firebrick;
 }
 </style>

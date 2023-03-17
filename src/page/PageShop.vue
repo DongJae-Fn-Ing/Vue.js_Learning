@@ -21,10 +21,16 @@
     <!-- <button type="button" v-on:click="countUp">허위매물 신고</button> <span>신고수 : {{count}}</span> -->
   </div>
 
-  <button type="button" @click="priceSort">가격낮은순 정렬 할꾸얌</button>
-  <button type="button" @click="reSort">가격높은순 정렬 할꾸얌</button>
-  <button type="button" @click="abcSort">가나다순 정렬이다 멍청아</button>
-  <button type="button" @click="backSort">되돌리기</button>
+  <button class="btn" type="button" @click="priceSort">
+    가격낮은순 정렬 할꾸얌
+  </button>
+  <button class="btn" type="button" @click="reSort">
+    가격높은순 정렬 할꾸얌
+  </button>
+  <button class="btn" type="button" @click="abcSort">
+    가나다순 정렬이다 멍청아
+  </button>
+  <button class="btn" type="button" @click="backSort">되돌리기</button>
   <div class="content">
     <ul class="list">
       <CardItem
@@ -164,6 +170,8 @@ export default {
 .menu li button {
   width: 100%;
   height: 100%;
+  background: blueviolet;
+  border: 1px solid #ddd;
 }
 
 /* 임시 콘텐츠 구역 */
@@ -204,6 +212,12 @@ export default {
 .list li p {
   display: block;
   margin: 5px 0;
+}
+
+.btn {
+  width: 200px;
+  height: 100px;
+  border: 1px solid darkcyan;
 }
 
 .start {
