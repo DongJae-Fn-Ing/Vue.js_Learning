@@ -18,6 +18,16 @@
             <router-link to="/shop">shop</router-link>
           </button>
         </li>
+        <li>
+          <button type="button">
+            <router-link to="/insta">insta</router-link>
+          </button>
+        </li>
+        <li>
+          <button type="button">
+            <router-link to="/tab">tab</router-link>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>

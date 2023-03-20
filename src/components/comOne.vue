@@ -1,6 +1,6 @@
 <template>
   <div class="component">
-    <h4>지금 사 안사면 멍청이 {{ disCount }}%</h4>
+    <h4>지금 사 안사면 멍청이 <span style="font-size: 120px">{{ disCount }}</span>%</h4>
   </div>
 </template>
 

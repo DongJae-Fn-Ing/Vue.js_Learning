@@ -5,6 +5,8 @@ import PageBlog from "../page/PageBlog.vue";
 import PageDetail from "../page/PageDetail.vue";
 import PageShop from "../page/PageShop.vue";
 import PageDetailDeep from "../page/PageDetailDeep.vue";
+import PageInsta from "../page/instagram/PageInsta.vue";
+import PageTab from "../page/PageTab.vue";
 
 const routes = [
   {
@@ -59,6 +61,14 @@ const routes = [
     component: 404page < 컴포넌트를 만들고,
     그리고 위에 쓸쑤록 우선권을 가진다
   }, */
+  {
+    path: "/insta",
+    component: PageInsta,
+  },
+  {
+    path: "/tab",
+    component: PageTab,
+  },
 ];
 
 const router = createRouter({
