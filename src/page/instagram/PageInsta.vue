@@ -21,8 +21,8 @@
     :uploadFile="uploadFile"
     :filterName="filterName"
   />
+  <h4>{{ $store.state.names }}</h4>
   <button @click="more" type="button" class="more-btn">더보기 버튼</button>
-
   <div class="footer">
     <ul class="footer-button-plus">
       <input
@@ -241,3 +241,12 @@ URL.createObjectURL() 한걸 변수에 담고
 /* 글 발행기능 */
 
 /* 상위 상위 컴포넌트 즉 먼 컴포넌트에 값을 전달할 때 mitt 라이브러리 */
+
+/* vuex 모든 컴포넌트들이 데이터를 공유할 수 있는 하나 js 파일 */
+/* 큰 프로젝트에서 써라 작은 프로젝트에서 쓰지 말 것*/
+/* 셋팅법
+자바스크립트 파일을 만들고 main.js에서 셋팅 */
+
+/* 규칙 vuex 국룰 state 수정하고 싶으면
+1. 미리 store.js에 수정 방법을 정의해두고
+2. 그 방법을 컴포넌트에서 소환해서 수정해야함 */
