@@ -1,8 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import routerTest from "./routes/router";
+import store from "./store";
 import mitt from "mitt";
-
 let emitter = mitt();
 let app = createApp(App);
 app.config.globalProperties.emitter = emitter;
@@ -20,4 +20,6 @@ app.config.globalProperties.변수명 = 변수명
 /* 응용을 하자면 모든 컴포넌트에서 사용하거나 쓰는 변수나 라이브 러리를
 이런식으로 추가해서 써라 */
 
-app.use(routerTest).mount("#app");
+/* vuex 설치법 */
+
+app.use(routerTest).use(store).mount("#app");
