@@ -11,6 +11,7 @@
     </div>
     <div
       class="post-body"
+      :class="`${instaData.filter}`"
       :style="{ backgroundImage: `url(${instaData.postImage})` }"
     ></div>
     <div class="post-content">
@@ -28,9 +29,7 @@ export default {
   name: "PostCom",
   props: {
     instaData: Object,
-  },
-  mounted() {
-    console.log(":::테스트", this.instaData.name);
+    filterName: String,
   },
   methods: {},
 };

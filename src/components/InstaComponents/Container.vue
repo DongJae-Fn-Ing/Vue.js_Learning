@@ -1,38 +1,72 @@
 <template>
   <div>
     <div class="tab-content" v-if="step === 0">
-      <Post v-for="(a, i) in instaData" :key="i" :instaData="instaData[i]" />
+      <Post
+        v-for="(a, i) in instaData"
+        :key="i"
+        :instaData="instaData[i]"
+      />
     </div>
     <!--     vue3부터 v-if와 v-for를 한번에 못씀 -->
     <div class="tab-content" v-if="step === 1">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :class="filterName"
+        :style="{ background: `url(${uploadFile}) no-repeat center / cover` }"
+      ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          v-for="(a, i) in FilterData"
+          :key="i"
+          :uploadFile="uploadFile"
+          :filterClass="a"
+        >
+          {{ a }}
+        </FilterBox>
       </div>
     </div>
     <div class="tab-content" v-if="step === 2">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :class="filterName"
+        :style="{ background: `url(${uploadFile}) no-repeat center / cover` }"
+      ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          class="write-box"
+          v-model="textArea"
+          @change="$emit('inputData', textArea)"
+        >
+write!</textarea
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import FilterBox from "./FilterBox";
 import Post from "./Post";
+import FilterData from "../../assets/filterData";
+
 export default {
   name: "ContainerCom",
   components: {
     Post,
+    FilterBox,
   },
+  data() {
+    return {
+      textArea: "",
+      FilterData: FilterData,
+    };
+  },
+  methods: {},
   props: {
     instaData: Object,
     step: Number,
+    uploadFile: String,
+    filterName: String,
   },
 };
 </script>
@@ -47,21 +81,10 @@ export default {
   width: 100%;
   height: 450px;
   background: cornflowerblue;
-  background-size: cover;
 }
 .filters {
   overflow-x: scroll;
   white-space: nowrap;
-}
-.filter-1 {
-  width: 100px;
-  height: 100px;
-  background-color: cornflowerblue;
-  margin: 10px 10px 10px auto;
-  padding: 8px;
-  display: inline-block;
-  color: white;
-  background-size: cover;
 }
 .filters::-webkit-scrollbar {
   height: 5px;
