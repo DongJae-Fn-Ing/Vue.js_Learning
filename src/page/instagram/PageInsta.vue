@@ -1,20 +1,41 @@
 <template>
   <div class="headers">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li><button type="button">Cancel</button></li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1">
+        <button @click="nextPage" type="button">Next</button>
+      </li>
+      <li v-if="step == 2">
+        <button @click="publish" type="button">발행</button>
+      </li>
     </ul>
     <img src="../../assets/logo.png" class="logo" />
   </div>
 
-  <Container :instaData="instaData" :step="step" />
+  <Container
+    @inputData="myWrite = $event"
+    :instaData="instaData"
+    :step="step"
+    :uploadFile="uploadFile"
+    :filterName="filterName"
+  />
   <button @click="more" type="button" class="more-btn">더보기 버튼</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input
+        @change="upload"
+        accept="image/*"
+        type="file"
+        id="file"
+        class="inputfile"
+      />
+      <!-- 파일 업로드시 코드 실행 -->
+      <!-- multiple 속성 넣으면 여러개 다루는 거 가능 -->
+      <!-- accept="image/*"만 보이기 -->
+      <!-- 그냥 확장자 검사해라 자바스크립트로 -->
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -28,11 +49,15 @@ import axios from "axios";
 
 export default {
   name: "PageInsta",
+
   data() {
     return {
       instaData: InstaDummyData,
       step: 0,
       count: 0,
+      uploadFile: ``,
+      myWrite: "",
+      filterName: "",
     };
   },
   components: {
@@ -59,6 +84,37 @@ export default {
     내가 원하는 url로 전송할때*/
     },
 
+    upload(e) {
+      let file = e.target.files;
+      console.log(URL.createObjectURL(file[0]));
+      this.uploadFile = URL.createObjectURL(file[0]);
+      this.step = 1;
+    },
+    nextPage() {
+      this.step++;
+    },
+    publish() {
+      let myData = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.uploadFile,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.myWrite,
+        filter: this.filterName,
+      };
+      this.instaData.unshift(myData);
+      /*       데이터 앞에 내가 입력한 값을 밀어 넣는 기능 
+      unshuft */
+      this.step = 0;
+    },
+  },
+  mounted() {
+    this.emitter.on("filterClassData", (a) => {
+      console.log(a);
+      this.filterName = a;
+    });
   },
 };
 </script>
@@ -168,3 +224,20 @@ ajax란 새로고침없이 get,post 요청하는 기능 */
 
 
 /* 탭을 만들어 보기 */
+
+/* 2023.03.21 이미지 업로드 */ 
+/* FileReader() 쓰거나 
+URL.createObjectURL()
+
+FileReader() 파일을 글자로 변환해줌
+URL.createObjectURL() 이미지의 가상 url을 생성해줌
+이 url을 이미지에 삽입하면 된다.
+
+URL.createObjectURL() 한걸 변수에 담고
+콘솔을 찍어보면 blob이라는 것이 나오는데 컴퓨터 안에 있는 모든 파일들은
+0과 1로 이루어진 바이너리 데이터라고 하는데
+바이너리 데이터를 다룰 때 blob이라는 object에 담아서 다룸 */
+
+/* 글 발행기능 */
+
+/* 상위 상위 컴포넌트 즉 먼 컴포넌트에 값을 전달할 때 mitt 라이브러리 */
