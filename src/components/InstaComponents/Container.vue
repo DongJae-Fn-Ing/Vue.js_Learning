@@ -5,6 +5,7 @@
         v-for="(a, i) in instaData"
         :key="i"
         :instaData="instaData[i]"
+        :postList="i"
       />
     </div>
     <!--     vue3부터 v-if와 v-for를 한번에 못씀 -->
@@ -41,6 +42,9 @@ write!</textarea
         >
       </div>
     </div>
+    <div class="tab-content" v-if="step === 3">
+      <MyPage :one="1" />
+    </div>
   </div>
 </template>
 
@@ -48,12 +52,14 @@ write!</textarea
 import FilterBox from "./FilterBox";
 import Post from "./Post";
 import FilterData from "../../assets/filterData";
+import MyPage from "./MyPage";
 
 export default {
   name: "ContainerCom",
   components: {
     Post,
     FilterBox,
+    MyPage,
   },
   data() {
     return {
