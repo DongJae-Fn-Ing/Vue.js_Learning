@@ -10,12 +10,13 @@
       <span class="profile-name">{{ instaData.name }}</span>
     </div>
     <div
+      @click="$store.commit('likeAdd', postList)"
       class="post-body"
       :class="`${instaData.filter}`"
       :style="{ backgroundImage: `url(${instaData.postImage})` }"
     ></div>
     <div class="post-content">
-      <p>{{ instaData.likes }} Likes</p>
+      <p>{{ $store.state.instaAllData[postList].likes }} Likes</p>
       <p>
         <strong>{{ instaData.filter }}</strong> {{ instaData.content }}
       </p>
@@ -30,6 +31,7 @@ export default {
   props: {
     instaData: Object,
     filterName: String,
+    postList: Number,
   },
   methods: {},
 };

@@ -22,6 +22,22 @@
     :filterName="filterName"
   />
   <h4>{{ $store.state.names }}</h4>
+  <p>{{ $store.state.age }}</p>
+  <button type="button" @click="$store.commit('nameChange')">
+    스테이트 변경 버튼
+  </button>
+  <button type="button" @click="$store.commit('ageAdd')">나이 감소</button>
+  <!--   데이터를 직접 바꾸지 말고 store.js에게 바꿔 달라고 부탁해라
+  스텝
+  1.sotre.js에서 state 수정 방법 정의
+  2.수정하고 싶으면 store.js에게 부탁 
+  $store.commit('nameChange', 데이터) 부탁하는 함수
+  mutations 실행하는 함수 commit
+  vuex의 장점은 state 변경은 내가 정의한 store.js만 합니다
+  이제 state가 이상하면 store.js만 뒤져도 될듯
+  -->
+  <button @click="$store.dispatch('getData')">테스트</button>
+  <!--   dispatch는 actions -->
   <button @click="more" type="button" class="more-btn">더보기 버튼</button>
   <div class="footer">
     <ul class="footer-button-plus">
@@ -46,6 +62,8 @@ import Container from "@/components/InstaComponents/Container";
 import InstaDummyData from "../../assets/instaData";
 import axios from "axios";
 /* axios임포트 후 */
+import { mapMutations, mapState } from "vuex";
+/* mapState 함수 사용하고 싶으면 호출 */
 
 export default {
   name: "PageInsta",
@@ -53,7 +71,7 @@ export default {
   data() {
     return {
       instaData: InstaDummyData,
-      step: 0,
+      step: 3,
       count: 0,
       uploadFile: ``,
       myWrite: "",
@@ -109,7 +127,40 @@ export default {
       unshuft */
       this.step = 0;
     },
+    now() {
+      return new Date();
+      /* 현재시간 출력 */
+    },
+
+    /* vuex mutations 함수를 한번에 꺼내다 쓰고 싶으면 methods 안에 */
+    ...mapMutations(["함수명", "test"]),
   },
+  computed: {
+    now2() {
+      return new Date();
+      /* 현재시간 출력 */
+
+      /*       그냥 state 하나 꺼내쓸 때도
+      computed 안에 사용하면 편할 수도 */
+    },
+
+    /* store.js의 name을 쓰고 싶으면 */
+    name() {
+      return this.$store.state.name;
+      /* computed 안에 함수는 항상 return을 써야함 */
+    },
+    ...mapState(["names", "age", "likes"]),
+    ...mapState({ 작명: "names" }),
+    /* store에 있는 state를 편하게 끌어다 쓸 수 있다 */
+    /* 작명도 가능 */
+  },
+
+  /* methods랑 computed 차이 */
+  /* methods 안에 있는 함수는 사용할 때 즉 호출할 때 마다 사용 */
+  /*   computed 안에 있는 함수는 사용해도 실행되지 않습니다.
+  뷰파일이 로드 및 라우팅 했을 때 사용  처음 실행한 값 간직함 즉 계산 결과 저장하는 곳
+  computed의 안에 함수 () 금지
+  */
   mounted() {
     this.emitter.on("filterClassData", (a) => {
       console.log(a);
@@ -250,3 +301,15 @@ URL.createObjectURL() 한걸 변수에 담고
 /* 규칙 vuex 국룰 state 수정하고 싶으면
 1. 미리 store.js에 수정 방법을 정의해두고
 2. 그 방법을 컴포넌트에서 소환해서 수정해야함 */
+
+/* 2023.03.22 pwa */
+/* 웹페이지를 모바일 페이지로 보여지기 */
+/* vue add pwa로 설치 dist 파일 확인 */
+
+
+/* 버그확인 */
+/* https://chrome.google.com/webstore/category/extensions 여기 들어가서 Vue.js devtools 라고 찾아서 설치합니다. */
+
+
+/* Composition API 사용법 */
+/* 지금까지 Options API방식으로 작성 */
