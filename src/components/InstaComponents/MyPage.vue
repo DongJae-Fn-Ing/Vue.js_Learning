@@ -1,7 +1,12 @@
 <template>
   <div style="padding: 10px">
     <h4>팔로워</h4>
-    <input class="f-input" placeholder="돋보기" />
+    <input
+      @input="(e) => search(e)"
+      type="text"
+      class="f-input"
+      placeholder="돋보기"
+    />
     <div class="post-header" v-for="(a, i) in follower" :key="i">
       <div
         class="profile"
@@ -74,15 +79,23 @@ export default {
     console.log(store.state.names);
     /* composition api에서 mapState못씀 */
 
+    function search(e) {
+      let searchText = e.target.value;
+      console.log(searchText);
 
-
-
-
-
+      if (searchText.includes("s")) {
+        
+        let test = follower.value.filter((a)=>{
+          return a.name.includes("s");
+        })
+        follower.value = test;
+      }
+    
+    }
 
     /* 여기있는 안에 데이터는 무조건.value */
 
-    return { follower };
+    return { follower, search };
     /* 위에서 쓰려면 무조건 이런식으로 리턴해라 */
   },
 };
