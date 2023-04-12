@@ -84,13 +84,11 @@ export default {
       console.log(searchText);
 
       if (searchText.includes("s")) {
-        
-        let test = follower.value.filter((a)=>{
+        let test = follower.value.filter((a) => {
           return a.name.includes("s");
-        })
+        });
         follower.value = test;
       }
-    
     }
 
     /* 여기있는 안에 데이터는 무조건.value */

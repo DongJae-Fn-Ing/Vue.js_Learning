@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       instaData: InstaDummyData,
-      step: 3,
+      step: 0,
       count: 0,
       uploadFile: ``,
       myWrite: "",
